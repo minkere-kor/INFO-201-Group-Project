@@ -1,5 +1,5 @@
 library(tidyverse)
-unclean <- read_delim("data/Absenteeism_at_work.csv") 
+unclean <- read_delim("absenteeism.csv") 
 
 colnames(unclean)[2] = "Reason_for_absence"
 colnames(unclean)[3] = "Month_of_absence"
@@ -49,6 +49,11 @@ absent <- unclean %>%
   mutate(Day_of_the_week = replace(Day_of_the_week, Day_of_the_week == "3", "Tuesday")) %>%
   mutate(Day_of_the_week = replace(Day_of_the_week, Day_of_the_week == "4", "Wednesday")) %>%
   mutate(Day_of_the_week = replace(Day_of_the_week, Day_of_the_week == "5", "Thursday")) %>%
-  mutate(Day_of_the_week = replace(Day_of_the_week, Day_of_the_week == "6", "Friday")) 
+  mutate(Day_of_the_week = replace(Day_of_the_week, Day_of_the_week == "6", "Friday")) %>% 
+  
+  mutate(Education = replace(Education, Education == "1", "Highschool")) %>% 
+  mutate(Education = replace(Education, Education == "2", "Graduate")) %>% 
+  mutate(Education = replace(Education, Education == "3", "Post-Graduate")) %>% 
+  mutate(Education = replace(Education, Education == "4", "Master and Doctor"))
 
-write_csv(absent, "data/absenteeism.csv")
+write_csv(absent, "absenteeism.csv")
