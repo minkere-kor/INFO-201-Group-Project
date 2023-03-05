@@ -31,7 +31,7 @@ ui <- fluidPage(
                )),
       tabPanel("Table",
                sidebarLayout(
-                 sidebar(),
+                 sidebarPanel(),
                  mainPanel()
                ))
     )
