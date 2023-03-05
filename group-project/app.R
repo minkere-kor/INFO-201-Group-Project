@@ -33,6 +33,11 @@ ui <- fluidPage(
                sidebarLayout(
                  sidebarPanel(),
                  mainPanel()
+               )),
+      tabPanel("Conclusion",
+               sidebarLayout(
+                 sidebarPanel(),
+                 mainPanel()
                ))
     )
 )
