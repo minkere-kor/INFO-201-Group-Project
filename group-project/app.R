@@ -40,7 +40,7 @@ ui <- fluidPage(
                                    transportation expenses, </i> and other personal identifying characteristics
                                    such as <i>height</i> and <i>education level.</i> <br/><br/>
                                    This dataset was retrieved from <b><u>UCI's Machine Learning Repository</u></b>.")),
-                 mainPanel()
+                 mainPanel(tags$img(src = "hr-2.jpg"))
                )),
       
       tabPanel("Question 1",
