@@ -24,16 +24,25 @@ ui <- fluidPage(
                  sidebarPanel(),
                  mainPanel()
                )),
-      tabPanel("Plots",
+      
+      tabPanel("Question 1",
                sidebarLayout(
                  sidebarPanel(),
                  mainPanel()
                )),
-      tabPanel("Table",
+      
+      tabPanel("Question 2",
                sidebarLayout(
                  sidebarPanel(),
                  mainPanel()
                )),
+      
+      tabPane("Question 3",
+              sidebarLayout(
+                sidebarPanel(),
+                mainPanel()
+              )),
+      
       tabPanel("Conclusion",
                sidebarLayout(
                  sidebarPanel(),
