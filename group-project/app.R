@@ -57,7 +57,17 @@ ui <- fluidPage(
       
       tabPanel("Question 3",
               sidebarLayout(
-                sidebarPanel(),
+                sidebarPanel(
+                  selectInput("health_factor", label = "Select a Health Factor",
+                              choices = c("Service_time", "Age", "Work_load_Average.day", 
+                                          "Social.drinker", "Social.smoker", "Weight", 
+                                          "Height", "Body_mass_index")),
+                  checkboxInput("add_trendline", "Add Trendline", FALSE),
+                  tabsetPanel(
+                    tabPanel("Plots", plotOutput("health_plot", height = "500px", width = "800px")),
+                    tabPanel("Average Time Off", plotOutput("avg_time_plot", height = "500px", width = "800px"))
+                  )
+                ),
                 mainPanel()
               )),
       
@@ -70,7 +80,54 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-
+  filtered_data <- reactive({
+    absent %>%
+      select(Absenteeism_time_in_hours, input$health_factor)
+  })
+  
+  output$health_plot <- renderPlot({
+    plot <- ggplot(filtered_data(), aes_string(x = input$health_factor, y = "Absenteeism_time_in_hours")) +
+      geom_point() +
+      labs(x = input$health_factor, y = "Absenteeism Time in Hours") +
+      annotate("text", x = min(filtered_data()[[input$health_factor]]), 
+               y = -25,
+               label = paste(input$health_factor, "(var number:num of datapoints):", 
+                             paste(sapply(unique(filtered_data()[[input$health_factor]]), function(i) {
+                               paste(i, ":", sum(filtered_data()[[input$health_factor]] == i))
+                             }), collapse = ", ")),
+               hjust = 0, size = 3) +
+      theme(plot.margin = unit(c(1, 1, 3, 1), "lines"))
+    
+    if (input$add_trendline) {
+      plot <- plot + geom_smooth(method = "lm")
+    }
+    
+    plot
+  })
+  
+  output$avg_time_plot <- renderPlot({
+    grouped_data <- absent %>% 
+      group_by(!!sym(input$health_factor)) %>%
+      summarise(avg_time = mean(Absenteeism_time_in_hours))
+    
+    plot <- ggplot(grouped_data, aes_string(x = input$health_factor, y = "avg_time")) +
+      geom_bar(stat = "identity") +
+      labs(x = input$health_factor, y = "Average Time Taken Off") +
+      annotate("text", x = min(grouped_data[[input$health_factor]]), 
+               y = -2,
+               label = paste(input$health_factor, "(var number:num of datapoints):", 
+                             paste(sapply(unique(grouped_data[[input$health_factor]]), function(i) {
+                               paste(i, ":", sum(grouped_data[[input$health_factor]] == i))
+                             }), collapse = ", ")),
+               hjust = 0, size = 3) +
+      theme(plot.margin = unit(c(1, 1, 3, 1), "lines"))
+    
+    if (input$add_trendline) {
+      plot <- plot + geom_smooth(method = "lm")
+    }
+    
+    plot
+  })
 
 }
 
