@@ -14,6 +14,11 @@ library(rsconnect)
 
 absent <- read_delim("absenteeism.csv")
 
+total_abs <- absent %>% 
+  group_by(ID) %>% 
+  count(Reason_for_absence) %>% 
+  summarize(total_absences = sum(n)) 
+
 ui <- fluidPage(
 
     titlePanel("Absenteeism in the Workplace"),
@@ -51,8 +56,18 @@ ui <- fluidPage(
       
       tabPanel("Question 2",
                sidebarLayout(
-                 sidebarPanel(),
-                 mainPanel()
+                 sidebarPanel(
+                   p("text"),
+                   
+                   radioButtons("plotSelect",
+                                "Select Plot",
+                                choices = c("Education", "# of Children", "# of Pets"))
+                   
+                 ),
+                 mainPanel(
+                   plotOutput("socPlot"),
+                   dataTableOutput("socTable")
+                 )
                )),
       
       tabPanel("Question 3",
@@ -79,56 +94,158 @@ ui <- fluidPage(
     )
 )
 
-server <- function(input, output) {
-  filtered_data <- reactive({
-    absent %>%
-      select(Absenteeism_time_in_hours, input$health_factor)
-  })
-  
-  output$health_plot <- renderPlot({
-    plot <- ggplot(filtered_data(), aes_string(x = input$health_factor, y = "Absenteeism_time_in_hours")) +
-      geom_point() +
-      labs(x = input$health_factor, y = "Absenteeism Time in Hours") +
-      annotate("text", x = min(filtered_data()[[input$health_factor]]), 
-               y = -25,
-               label = paste(input$health_factor, "(var number:num of datapoints):", 
-                             paste(sapply(unique(filtered_data()[[input$health_factor]]), function(i) {
-                               paste(i, ":", sum(filtered_data()[[input$health_factor]] == i))
-                             }), collapse = ", ")),
-               hjust = 0, size = 3) +
-      theme(plot.margin = unit(c(1, 1, 3, 1), "lines"))
-    
-    if (input$add_trendline) {
-      plot <- plot + geom_smooth(method = "lm")
-    }
-    
-    plot
-  })
-  
-  output$avg_time_plot <- renderPlot({
-    grouped_data <- absent %>% 
-      group_by(!!sym(input$health_factor)) %>%
-      summarise(avg_time = mean(Absenteeism_time_in_hours))
-    
-    plot <- ggplot(grouped_data, aes_string(x = input$health_factor, y = "avg_time")) +
-      geom_bar(stat = "identity") +
-      labs(x = input$health_factor, y = "Average Time Taken Off") +
-      annotate("text", x = min(grouped_data[[input$health_factor]]), 
-               y = -2,
-               label = paste(input$health_factor, "(var number:num of datapoints):", 
-                             paste(sapply(unique(grouped_data[[input$health_factor]]), function(i) {
-                               paste(i, ":", sum(grouped_data[[input$health_factor]] == i))
-                             }), collapse = ", ")),
-               hjust = 0, size = 3) +
-      theme(plot.margin = unit(c(1, 1, 3, 1), "lines"))
-    
-    if (input$add_trendline) {
-      plot <- plot + geom_smooth(method = "lm")
-    }
-    
-    plot
-  })
 
+
+## QUESTION 1
+
+## QUESTION 2
+  
+  output$socPlot <- renderPlot({
+    if(input$plotSelect == "Education"){
+      currentTable <- absent %>% 
+        select(ID, Education) %>% 
+        distinct(ID, Education) %>% 
+        merge(total_abs, by = "ID")
+      
+      currentPlot <- currentTable %>% 
+        ggplot(aes(Education,
+                   total_absences,
+                   fill=factor(ID))) +
+        geom_col(col="black",
+                 width = 0.5) +
+        labs(title = "Number of Absences based on Education",
+             x = "Education Level",
+             y = "Number of Absences",
+             fill = "Employee ID") +
+        theme(plot.title = element_text(size = 25),
+              axis.text = element_text(size = 10),
+              axis.title = element_text(size = 20),
+              legend.title = element_text(size = 15))
+    } 
+    
+    else if(input$plotSelect == "# of Children"){
+      currentTable <- absent %>% 
+        select(ID, Son) %>% 
+        distinct(ID, Son) %>% 
+        merge(total_abs, by = "ID")
+      
+      currentPlot <- currentTable %>% 
+        ggplot(aes(Son,
+                   total_absences,
+                   fill=factor(ID))) +
+        geom_col(col="black",
+                 width = 0.5) +
+        labs(title = "Number of Absences based on Number of Children",
+             x = "Number of Children",
+             y = "Number of Absences",
+             fill = "Employee ID") +
+        theme(plot.title = element_text(size = 25),
+              axis.text = element_text(size = 10),
+              axis.title = element_text(size = 20),
+              legend.title = element_text(size = 15))
+    }  
+    
+    else if(input$plotSelect == "# of Pets"){
+      currentTable <- absent %>% 
+        select(ID, Pet) %>% 
+        distinct(ID, Pet) %>% 
+        merge(total_abs, by = "ID")
+      
+      currentPlot <- currentTable %>% 
+        ggplot(aes(Pet,
+                   total_absences,
+                   fill=factor(ID))) +
+        geom_col(col="black",
+                 width = 0.5) +
+        labs(title = "Number of Absences based on Number of Pets",
+             x = "Number of Pets",
+             y = "Number of Absences",
+             fill = "Employee ID") +
+        theme(plot.title = element_text(size = 25),
+              axis.text = element_text(size = 10),
+              axis.title = element_text(size = 20),
+              legend.title = element_text(size = 15))
+    }
+    currentPlot
+  })
+  
+  output$socTable <- renderDataTable({
+    if(input$plotSelect == "Education"){
+      currentTable <- absent %>% 
+        select(ID, Education) %>% 
+        distinct(ID, Education) %>% 
+        merge(total_abs, by = "ID")
+    } 
+    
+    else if(input$plotSelect == "# of Children"){
+      currentTable <- absent %>% 
+        select(ID, Son) %>% 
+        distinct(ID, Son) %>% 
+        merge(total_abs, by = "ID")
+    }
+    
+    else if(input$plotSelect == "# of Pets"){
+      currentTable <- absent %>% 
+        select(ID, Pet) %>% 
+        distinct(ID, Pet) %>% 
+        merge(total_abs, by = "ID")
+    }
+    
+      currentTable %>% 
+        arrange(desc(total_absences)) %>% 
+        head(10)
+  })
+  
+## QUESTION 3
+  server <- function(input, output) {
+    filtered_data <- reactive({
+      absent %>%
+        select(Absenteeism_time_in_hours, input$health_factor)
+    })
+    
+    output$health_plot <- renderPlot({
+      plot <- ggplot(filtered_data(), aes_string(x = input$health_factor, y = "Absenteeism_time_in_hours")) +
+        geom_point() +
+        labs(x = input$health_factor, y = "Absenteeism Time in Hours") +
+        annotate("text", x = min(filtered_data()[[input$health_factor]]), 
+                 y = -25,
+                 label = paste(input$health_factor, "(var number:num of datapoints):", 
+                               paste(sapply(unique(filtered_data()[[input$health_factor]]), function(i) {
+                                 paste(i, ":", sum(filtered_data()[[input$health_factor]] == i))
+                               }), collapse = ", ")),
+                 hjust = 0, size = 3) +
+        theme(plot.margin = unit(c(1, 1, 3, 1), "lines"))
+      
+      if (input$add_trendline) {
+        plot <- plot + geom_smooth(method = "lm")
+      }
+      
+      plot
+    })
+    
+    output$avg_time_plot <- renderPlot({
+      grouped_data <- absent %>% 
+        group_by(!!sym(input$health_factor)) %>%
+        summarise(avg_time = mean(Absenteeism_time_in_hours))
+      
+      plot <- ggplot(grouped_data, aes_string(x = input$health_factor, y = "avg_time")) +
+        geom_bar(stat = "identity") +
+        labs(x = input$health_factor, y = "Average Time Taken Off") +
+        annotate("text", x = min(grouped_data[[input$health_factor]]), 
+                 y = -2,
+                 label = paste(input$health_factor, "(var number:num of datapoints):", 
+                               paste(sapply(unique(grouped_data[[input$health_factor]]), function(i) {
+                                 paste(i, ":", sum(grouped_data[[input$health_factor]] == i))
+                               }), collapse = ", ")),
+                 hjust = 0, size = 3) +
+        theme(plot.margin = unit(c(1, 1, 3, 1), "lines"))
+      
+      if (input$add_trendline) {
+        plot <- plot + geom_smooth(method = "lm")
+      }
+      
+      plot
+    })
 }
 
 shinyApp(ui = ui, server = server)
