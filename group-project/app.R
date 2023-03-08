@@ -48,6 +48,18 @@ ui <- fluidPage(
                                    transportation expense, </i> and other personal identifying characteristics
                                    such as <i>height</i> and <i>education level.</i> <br/><br/>
                                    
+                                   When it comes to <u>data quality</u> and <u>reliabilty</u>, the dataset is reliable but 
+                                   there are quality issues because we had to be dependent on a key to understand the data. 
+                                   Categorical data used numbers when labels and words may be suitable. In addition, there
+                                   was a variable in the data set simply called “Son”. While the key says that this is supposed
+                                   to mean the number of male or female children that the worker has, it could’ve easily been 
+                                   misinterpreted as True/False “Do you have a son” or “How many male children” do you have. <br/><br/>
+
+                                   In regards to whether the data is ethical, We see no ethical issues with using this data
+                                   because while there is information that some people might want to keep private, such as BMI,
+                                   reasons for absences, etc, everyone is kept entirely anonymous because they can only be
+                                   identified by an ID number. <br/><br/>
+                                   
                                    This dataset was retrieved from <b><u>UCI's Machine Learning Repository</u></b>.")),
                  mainPanel(tags$img(src = "hr-2.jpg"))
                )),
