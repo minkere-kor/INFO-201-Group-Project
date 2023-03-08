@@ -134,22 +134,6 @@ ui <- fluidPage(
                     
                    In addition, in order to increase ease of anaylsis, beneath the plot is a table
                    that shows the employee with the highest number of absences for each plot.
-                
-                   <br/><br/>
-                   
-                   What the data seems to indicate is that social factors have very little impact on
-                   the number of absences that an employee has. For example, the number of absences
-                   comes more from individuals who have no children or pets and one can see a general
-                   decrease in absences as an employee has more pets or children.
-                    
-                   <br/><br/>
-                    
-                   It's also difficult to determine whether or not education plays a huge role in the
-                   number of absences because a massive majority of employees are only high school
-                   graduates, thus skewing the data to include them the most.
-                        
-                   <br/><br/>
-                    
                    "),
                    
                    radioButtons("plotSelect",
