@@ -212,7 +212,48 @@ ui <- fluidPage(
       
       tabPanel("Conclusion",
                sidebarLayout(
-                 sidebarPanel(),
+                 sidebarPanel(HTML("From the analysis that we have done on the data set, we concluded
+                                   in the end that there was no substantial evidence to suggest that 
+                                   there is any pattern between any of the factors we chose and absenteeism."),
+                              
+                              tags$hr(),
+                              HTML("<ul>
+                                    <li><b>Question 1</b>: The plots show that there is a weak positive relationship
+                                      between distance to work and absences. As for transportation expenses
+                                      and absences, there is a weak negative correlation. It’s also worth noting
+                                      that the correlation’s direction changes depending on the range of data being
+                                      observed for the transportation expense variable. <br/><br/>
+                                      
+                                      Many of the data points for both variables do not fall near the line of best fit. 
+                                      Thus, we can not conclude that there is a relationship between total absences and
+                                      the variables mentioned above. </li>
+                                    </ul>"),
+                              
+                                  tags$hr(),
+                                  HTML("<ul>
+                                      <li><b>Question 2</b>: What the data seems to indicate is that social factors have very
+                                      little impact on the number of absences that an employee has. For example, the number
+                                      of absences comes more from individuals who have no children or pets and one can see
+                                      a general decrease in absences as an employee has more pets or children. <br/><br/>
+                                      
+                                      It's also difficult to determine whether or not education plays a huge role in the number
+                                      of absences because a massive majority of employees are only high school graduates, thus skewing
+                                      the data to include them the most. </li>
+                                      </ul>"),
+                              
+                                  tags$hr(),
+                                  HTML("<ul>
+                                      <li><b>Question 3</b>: Many of the variables do not have any correlation when plotted versus total number
+                                      of absence hours. The few variables that we found have a correlation was height (positive) and BMI (negative).
+                                      However, when comparing versus average time off, we see that there are slight correlations for service time (positive),
+                                      workload average/day (positive), social smoking (negative), and weight (negative). We also see strong correlations with
+                                      age (positive), social drinking (positive), height (positive), and BMI (negative). <br/><br/>
+                                      
+                                      Despite these correlations, it is hard to say whether or not many of these variables actually cause absenteeism. 
+                                      While some may have strong correlation, it isn't necessarily a direct cause. After all, BMI has a strong negative correlation,
+                                      and social smoking has a slight negative correlation, which may be the opposite of what people are expecting. So while these
+                                      do provide accurate correlations, further research must be conducted in order to determine causation.</li>
+                                   </ul>")),
                  mainPanel()
                ))
     )
