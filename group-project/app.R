@@ -172,8 +172,8 @@ ui <- fluidPage(
                   
                   <br/><br/>
                   
-                  To analyse this, we selected <b>service time<b>, <b>age<b>, <b>workload average per day<b>,
-                  <b>social drinking and smoking<b>, <b>weight<b>, <b>height<b>, and <b>BMI<b>.
+                  To analyse this, we selected <b>service time</b>, <b>age</b>, <b>workload average per day</b>,
+                  <b>social drinking and smoking</b>, <b>weight</b>, <b>height</b>, and <b>BMI</b>.
                   
                   <br/><br/>
                   
@@ -211,6 +211,9 @@ ui <- fluidPage(
                   "),
                    
                    
+                  
+                ),
+                mainPanel(
                   selectInput("health_factor", label = "Select a Health Factor",
                               choices = c("Service_time", "Age", "Work_load_Average.day", 
                                           "Social.drinker", "Social.smoker", "Weight", 
@@ -220,8 +223,7 @@ ui <- fluidPage(
                     tabPanel("Plots", plotOutput("health_plot", height = "500px", width = "800px")),
                     tabPanel("Average Time Off", plotOutput("avg_time_plot", height = "500px", width = "800px"))
                   )
-                ),
-                mainPanel()
+                )
               )),
       
       tabPanel("Conclusion",
