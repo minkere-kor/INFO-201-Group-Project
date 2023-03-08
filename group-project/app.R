@@ -154,6 +154,51 @@ ui <- fluidPage(
       tabPanel("Question 3",
               sidebarLayout(
                 sidebarPanel(
+                  HTML("The third question that we tried to answer by analyzing the data set is if health factors,
+                  such as social smoking or BMI, impact the amount of absences that a worker has. For example, 
+                  an employee that drinks socially may call in more times compared to a worker that doesn't.
+                  
+                  <br/><br/>
+                  
+                  To analyse this, we selected <b>service time<b>, <b>age<b>, <b>workload average per day<b>,
+                  <b>social drinking and smoking<b>, <b>weight<b>, <b>height<b>, and <b>BMI<b>.
+                  
+                  <br/><br/>
+                  
+                  The singular plot can be changed through each of these variables and plots it versus the total
+                  number of hours called in for each amount. For example, if nonsmokers called in for 4, 2, 6, 8
+                  hours on 4 different occasions, it would plot 4 points at (0, 4), (0, 2), etc. Additionally,
+                  we can change the plot to be versus average time taken off for each variable. By doing so, trend
+                  lines would not be skewed based on the sheer number of occurrences, and provides a different 
+                  view on the data. 
+                  
+                  <br/><br/>
+                  
+                  Furthermore, a trendline can be toggled on and off. Due to the amount of data, 
+                  it can be hard to analyse by eye, so a trendline is added to show if there is correlation between
+                  the variables or not. A sentence adding the variable name, as well as the number of datapoints for
+                  each variable level is added under the plot.
+                  
+                  <br/><br/>
+                  
+                  Many of the variables do not have any correlation when plotted versus total number of absence hours.
+                  The few variables that we found have a correlation was height (positive) and BMI (negative). However
+                  when comparing versus average time off, we see that there are slight correlations for service time 
+                  (positive), workload average/day (positive), social smoking (negative), and weight 
+                  (negative). We also see strong correlations with age (positive), social drinking (positive), height
+                  (positive), and BMI (negative).
+                  
+                  <br/><br/>
+                  
+                  Despite these correlations, it is hard to say whether or not many of these variables 
+                  actually cause absenteeism. While some may have strong correlation, it isn't necessarily
+                  a direct cause. After all, BMI has a strong negative correlation, and social smoking has a slight
+                  negative correlation, which may be the opposite of what people are expecting. While these do provide
+                  accurate correlations, further research must be conducted in order to determine causation.
+                  
+                  "),
+                   
+                   
                   selectInput("health_factor", label = "Select a Health Factor",
                               choices = c("Service_time", "Age", "Work_load_Average.day", 
                                           "Social.drinker", "Social.smoker", "Weight", 
