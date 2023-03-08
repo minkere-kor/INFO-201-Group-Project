@@ -212,7 +212,8 @@ ui <- fluidPage(
       
       tabPanel("Conclusion",
                sidebarLayout(
-                 sidebarPanel(HTML("From the analysis that we have done on the data set, we concluded
+                 sidebarPanel(tags$h3("Final Thoughts"), 
+                              HTML("From the analysis that we have done on the data set, we concluded
                                    in the end that there was no substantial evidence to suggest that 
                                    there is any pattern between any of the factors we chose and absenteeism."),
                               
@@ -254,7 +255,17 @@ ui <- fluidPage(
                                       and social smoking has a slight negative correlation, which may be the opposite of what people are expecting. So while these
                                       do provide accurate correlations, further research must be conducted in order to determine causation.</li>
                                    </ul>")),
-                 mainPanel()
+                 mainPanel(tags$h3("Question 1"),
+                           tags$img(src = "img-1.png", height = "38.5%", width = "38.5%"),
+                           tags$img(src = "img-2.gif"),
+                           
+                           tags$hr(),
+                           
+                           tags$h3("Question 2"),
+                           
+                           tags$hr(),
+                           
+                           tags$h3("Question 3"))
                ))
     )
 )
