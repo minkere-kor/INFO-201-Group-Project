@@ -64,8 +64,8 @@ ui <- fluidPage(
                                    
                                    This interactive page will test if this claim is applicable
                                    to the firm's circumstances. In addition, transportation expense
-                                   will also be evaluated as costs may pose a barrier for employees to
-                                   go to the workplace. <br><br/>
+                                   will also be evaluated as costs may prevent employees from
+                                   going to the workplace. <br><br/>
                                    
                                    Below, the following widgets are <i>Variable Selection, Data Range Slider, and 
                                    Trend Line Toggle.</i> <br/><br/>
