@@ -54,11 +54,6 @@ ui <- fluidPage(
                                    was a variable in the data set simply called “Son”. While the key says that this is supposed
                                    to mean the number of male or female children that the worker has, it could’ve easily been 
                                    misinterpreted as True/False “Do you have a son” or “How many male children” do you have. <br/><br/>
-
-                                   In regards to whether the data is ethical, We see no ethical issues with using this data
-                                   because while there is information that some people might want to keep private, such as BMI,
-                                   reasons for absences, etc, everyone is kept entirely anonymous because they can only be
-                                   identified by an ID number. <br/><br/>
                                    
                                    This dataset was retrieved from <b><u>UCI's Machine Learning Repository</u></b>.")),
                  mainPanel(tags$img(src = "hr-2.jpg"))
@@ -219,42 +214,63 @@ ui <- fluidPage(
                               
                               tags$hr(),
                               HTML("<ul>
-                                    <li><b>Question 1</b>: The plots show that there is a weak positive relationship
-                                      between distance to work and absences. As for transportation expenses
-                                      and absences, there is a weak negative correlation. It’s also worth noting
-                                      that the correlation’s direction changes depending on the range of data being
-                                      observed for the transportation expense variable. <br/><br/>
+                                    <li><b>Question 1</b>: The plots showed that there was a weak positive relationship
+                                      between distance to work and absences. For transportation expenses
+                                      and absences, there was a weak negative correlation. The correlation’s direction also
+                                      changed depending on the range of data being observed for the transportation expense
+                                      variable. <br/><br/>
                                       
-                                      Many of the data points for both variables do not fall near the line of best fit. 
-                                      Thus, we can not conclude that there is a relationship between total absences and
-                                      the variables mentioned above. </li>
+                                      Much of the data points for both variables didn't fall near the line of best fit. 
+                                      Thus, we couldn't conclude that there is a relationship between total absences and
+                                      the variables mentioned. </li>
                                     </ul>"),
                               
                                   tags$hr(),
                                   HTML("<ul>
-                                      <li><b>Question 2</b>: What the data seems to indicate is that social factors have very
-                                      little impact on the number of absences that an employee has. For example, the number
-                                      of absences comes more from individuals who have no children or pets and one can see
-                                      a general decrease in absences as an employee has more pets or children. <br/><br/>
+                                      <li><b>Question 2</b>: The data indicated that social factors had
+                                      little impact on the number of absences that an employee has. The highest cases of
+                                      of absences came from individuals with no children or pets with less cases coming from
+                                      those with more. <br/><br/>
                                       
-                                      It's also difficult to determine whether or not education plays a huge role in the number
-                                      of absences because a massive majority of employees are only high school graduates, thus skewing
-                                      the data to include them the most. </li>
+                                      It was also difficult to determine whether education plays a role in absences because a
+                                      large majority of employees were high school graduates. This skewed the data
+                                      disproportionately to represent them the most. </li>
                                       </ul>"),
                               
                                   tags$hr(),
                                   HTML("<ul>
-                                      <li><b>Question 3</b>: Many of the variables do not have any correlation when plotted versus total number
-                                      of absence hours. The few variables that we found have a correlation was height (positive) and BMI (negative).
-                                      However, when comparing versus average time off, we see that there are slight correlations for service time (positive),
-                                      workload average/day (positive), social smoking (negative), and weight (negative). We also see strong correlations with
+                                      <li><b>Question 3</b>: Many of the variables didn't have any correlation when plotted against hours of absence.
+                                      The variables that did have a correlation were height (positive) and BMI (negative).
+                                      However, when compared versus average time off, there were slight correlations for service time (positive),
+                                      workload average/day (positive), social smoking (negative), and weight (negative). There were also strong correlations with
                                       age (positive), social drinking (positive), height (positive), and BMI (negative). <br/><br/>
                                       
-                                      Despite these correlations, it is hard to say whether or not many of these variables actually cause absenteeism. 
-                                      While some may have strong correlation, it isn't necessarily a direct cause. After all, BMI has a strong negative correlation,
-                                      and social smoking has a slight negative correlation, which may be the opposite of what people are expecting. So while these
-                                      do provide accurate correlations, further research must be conducted in order to determine causation.</li>
-                                   </ul>")),
+                                      Despite these correlations, it's hard to say whether these variables actually cause absenteeism. 
+                                      While some have strong correlation, they arn't necessarily a direct cause. After all, BMI had a strong negative correlation,
+                                      and social smoking had a slight negative correlation, which may be the opposite of what people expected. So while these
+                                      do provide accurate correlations, further research must be conducted in order to determine causation.</li><br/><br/>
+                                   </ul>"),
+                              
+                                   HTML("The information that we got from our insight implies that there are additional factors that we have not considered
+                                   that are influencing the rate and amount of absenteeism for employees working at the firm. <br/><br/>
+                                   
+                                      Regarding ethics, We saw no issues in using this data.
+                                      While there is information that some people might want to keep private, such as BMI,
+                                      everyone is kept anonymous by only being identified by an ID number. <br/><br/>
+                                      
+                                      However, we did see issues with data quality. Many variables were recorded with
+                                      numbers instead of words, like seasons and education. This made it difficult to analyse the data
+                                      without using a key and complicated using the set.
+                                      
+                                      The data set also uses the variable 'Son' to indicate the number of children an employee has,
+                                      making it extremely misleading as to what the variable was supposed to indicate. <br/><br/>
+                                      
+                                      In the future, more analysis can be done to take into consideration other factors and variables that the 
+                                      data set provided to see if a genuine pattern could be found that correlates with the rate of absenteeism
+                                      in an employee.
+                                        
+                                      <br/><br/>")
+                              ),
                  mainPanel(tags$h3("Question 1"),
                            tags$img(src = "img-1.png", height = "38.5%", width = "38.5%"),
                            tags$img(src = "img-2.gif"),
@@ -262,10 +278,14 @@ ui <- fluidPage(
                            tags$hr(),
                            
                            tags$h3("Question 2"),
+                           tags$img(src = "q2-img-1.png", height = "50%", width = "50%"),
+                           
                            
                            tags$hr(),
                            
-                           tags$h3("Question 3"))
+                           tags$h3("Question 3"),
+                           
+                           )
                ))
     )
 )
