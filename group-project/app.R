@@ -285,6 +285,11 @@ ui <- fluidPage(
                            
                            tags$h3("Question 3"),
                            
+                           tags$img(src = "q3 img 1.png", height = "50%", width = "50%"),
+                           tags$img(src = "q3 img 2.png", height = "50%", width = "50%"),
+                           
+                           tags$hr(),
+                           
                            )
                ))
     )
