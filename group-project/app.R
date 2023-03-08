@@ -96,7 +96,48 @@ ui <- fluidPage(
       tabPanel("Question 2",
                sidebarLayout(
                  sidebarPanel(
-                   p("text"),
+                   HTML("The second question that we tried to answer by analyzing the data set is whether
+                   or not social factors, such as education and number of children, impact the amount
+                   of absences that a worker has. For example, an employee that has multiple children
+                   might have to call in as absent more often than one who doesn't in order to take
+                   care of business within his family.
+                   
+                   <br/><br/>
+
+                   As a result, the variables that we decided to use for analyzing social factors in
+                   relation to absences are <b>education</b>, <b>number of children</b>, and <b>number
+                   of pets</b>.
+                    
+                   <br/><br/>
+                    
+                   The plot on the right can be changed into one of three individual plots through 
+                   the use of the <b>Select Plot</b> radio buttons on the side bar panel. Each plot
+                   depicts a column plot that catagorizes the employees working at the firm into their
+                   level of education, number of children, or number of pets respectively. This allows
+                   us to see which categories, as well as individuals in those categories, have the 
+                   largest amount of absences
+                    
+                   <br/><br/>
+                    
+                   In addition, in order to increase ease of anaylsis, beneath the plot is a table
+                   that shows the employee with the highest number of absences for each plot.
+                
+                   <br/><br/>
+                   
+                   What the data seems to indicate is that social factors have very little impact on
+                   the number of absences that an employee has. For example, the number of absences
+                   comes more from individuals who have no children or pets and one can see a general
+                   decrease in absences as an employee has more pets or children.
+                    
+                   <br/><br/>
+                    
+                   It's also difficult to determine whether or not education plays a huge role in the
+                   number of absences because a massive majority of employees are only high school
+                   graduates, thus skewing the data to include them the most.
+                        
+                   <br/><br/>
+                    
+                   "),
                    
                    radioButtons("plotSelect",
                                 "Select Plot",
@@ -134,7 +175,7 @@ ui <- fluidPage(
 )
 
 
-
+server <- function(input, output) {
 ## QUESTION 1
     subsetData1 <- reactive({
       absent %>% 
@@ -325,7 +366,6 @@ ui <- fluidPage(
   })
   
 ## QUESTION 3
-  server <- function(input, output) {
     filtered_data <- reactive({
       absent %>%
         select(Absenteeism_time_in_hours, input$health_factor)
