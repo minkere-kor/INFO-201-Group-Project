@@ -13,6 +13,7 @@ library(colorspace)
 library(rsconnect)
 
 absent <- read_delim("absenteeism.csv")
+names(absent) <- make.names(names(absent))
 
 total_abs <- absent %>% 
   group_by(ID) %>% 
